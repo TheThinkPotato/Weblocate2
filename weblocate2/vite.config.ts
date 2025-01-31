@@ -27,6 +27,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/geoip/, ""),
       },
+      "/api/dns.google": {
+        target: "https://dns.google",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/dns.google/, ""),
+      },
     },
   },
 });

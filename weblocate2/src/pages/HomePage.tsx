@@ -1,31 +1,53 @@
-import ResultTable, {
-  IpGeoLocationType,
-  ResultTableType,
-} from "@/components/ResultTable/ResultTable";
+import ResultTable from "@/components/ResultTable/ResultTable";
 import SearchIp from "../components/SearchIp/SearchIp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGetAbuseIp from "@/hooks/useGetAbuseIp/useGetAbuseIp";
 import useGetIpGeoLocation from "@/hooks/useGetIpGeoLocation/useGetIpGeoLocation";
 import Spinner from "@/components/Spinner/Spinner";
 import ErrorMessage from "@/components/Error/ErrorContainer";
-import { testValidIp } from "@/Helpers/helper";
+import {
+  getIpFromGoogleAnswerArray,
+  removeHttpHttpsFromDomain,
+  testValidDomain,
+  testValidIp,
+} from "@/Helpers/helper";
+import SearchDomain from "@/components/SearchDomain/SearchDomain";
+import {
+  googleResolveType,
+  IpGeoLocationType,
+  ResultTableType,
+} from "@/Types/Types";
+import useGetGoogleResolve from "@/hooks/usGetGoogleResolve/useGetGoogleResolve";
 
 const Home = () => {
   const [queryIp, setQueryIp] = useState("");
   const [invalidIp, setInvalidIp] = useState(false);
   const [startSearch, setStartSearch] = useState(false);
 
+  const [queryDomain, setQueryDomain] = useState("");
+  const [invalidDomain, setInvalidDomain] = useState(false);
+  const [startDomainSearch, setStartDomainSearch] = useState(false);
+
   const searchIp = (ip: string) => {
     const isValidIp = testValidIp(ip);
     setInvalidIp(!isValidIp);
-
     if (!isValidIp) {
       setStartSearch(false);
       return;
     }
-
     setQueryIp(ip);
     setStartSearch(true);
+  };
+
+  const searchDomain = (domain: string) => {
+    const isValidDomain = testValidDomain(domain);
+    setInvalidDomain(!isValidDomain);
+    if (!domain) {
+      setStartDomainSearch(false);
+      return;
+    }
+    setQueryDomain(removeHttpHttpsFromDomain(domain));
+    setStartDomainSearch(true);
   };
 
   const {
@@ -33,19 +55,46 @@ const Home = () => {
     loading: abuseIpLoading,
     error: abuseIpError,
   } = useGetAbuseIp(queryIp, startSearch);
+
   const {
     data: geoData,
     loading: geoLoading,
     error: geoError,
   } = useGetIpGeoLocation(queryIp, startSearch);
 
+  const { data: domainIpData } = useGetGoogleResolve(
+    queryDomain,
+    startDomainSearch
+  );
+
+  const domainIp = getIpFromGoogleAnswerArray(
+    domainIpData?.data as unknown as googleResolveType
+  );
+
+  useEffect(() => {
+    if (testValidIp(domainIp as string)) {
+      setQueryIp(domainIp as string);
+      setStartSearch(true);
+      setInvalidDomain(false);
+    } else {
+      setQueryIp("");
+      setStartSearch(false);
+      setInvalidDomain(true);
+    }
+  }, [domainIp]);
+
   const error = abuseIpError || geoError;
 
   const onChange = (value: string) => {
     value = value.trim();
-
     setStartSearch(false);
     setQueryIp(value);
+  };
+
+  const onDomainChange = (value: string) => {
+    value = value.trim();
+    setStartDomainSearch(false);
+    setQueryDomain(value);
   };
 
   return (
@@ -68,6 +117,14 @@ const Home = () => {
               onChange={onChange}
               value={queryIp}
               invalidIp={invalidIp}
+            />
+          </div>
+          <div className="mt-16 mx-2">
+            <SearchDomain
+              onSearch={searchDomain}
+              onChange={onDomainChange}
+              value={queryDomain}
+              invalidDomain={invalidDomain}
             />
           </div>
         </div>

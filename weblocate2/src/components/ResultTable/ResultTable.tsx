@@ -1,41 +1,12 @@
 import { decimalToDMS } from "@/Helpers/helper";
 import BarGraph from "../BarGraph/BarGraph";
 import Map from "../Map/Map";
-
-export type ResultTableType = {
-  ipAddress: string;
-  isPublic: boolean;
-  ipVersion: number;
-  isWhitelisted: boolean;
-  abuseConfidenceScore: number;
-  countryCode: string;
-  usageType: string;
-  isp: string;
-  domain: string;
-  hostnames: [string];
-  isTor: boolean;
-  totalReports: number;
-  numDistinctUsers: number;
-  lastReportedAt: string;
-};
-
-export type IpGeoLocationType = {
-  state_prov: string;
-  state_code: string;
-  district: string;
-  city: string;
-  zipcode: string;
-  latitude: string;
-  longitude: string;
-  country_flag?: string;
-};
+import { IpGeoLocationType, ResultTableType } from "@/Types/Types";
 
 interface ResultTableProps {
   abuseData?: ResultTableType;
   ipGeoData?: IpGeoLocationType;
 }
-
-
 
 enum alertLevel {
   LOW = 10,
