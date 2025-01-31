@@ -6,3 +6,17 @@ export function decimalToDMS(decimalDegrees: number): string {
     
     return `${degrees}° ${minutes}' ${seconds.toFixed(2)}"`; // Return DMS string
 }
+
+export function testValidIp(ip: string): boolean {
+    const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/; // Regex for IPv4 address
+    const classCRegEx = /^192\.168\.\d{1,3}\.\d{1,3}$/; // Regex for Class C private IP address
+    const classCRegEx2 = /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/; // Regex for Class C private IP address
+    const classCRegEx3 = /^172\.(1[6-9]|2[0-9]|3[0-1])\.\d{1,3}\.\d{1,3}$/; // Regex for Class C private IP address
+    const loopbackRegEx = /^127\.\d{1,3}\.\d{1,3}\.\d{1,3}$/; // Regex for loopback IP address
+
+    const validIpV4 =  ipv4Regex.test(ip);
+    const classC = classCRegEx.test(ip) || classCRegEx2.test(ip) || classCRegEx3.test(ip);
+    const loopback = loopbackRegEx.test(ip);
+
+    return validIpV4 && !classC && !loopback; // Return true if valid IPv4 and not a Class C private IP address
+}

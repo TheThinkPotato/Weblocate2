@@ -8,6 +8,7 @@ import useGetAbuseIp from "@/hooks/useGetAbuseIp/useGetAbuseIp";
 import useGetIpGeoLocation from "@/hooks/useGetIpGeoLocation/useGetIpGeoLocation";
 import Spinner from "@/components/Spinner/Spinner";
 import ErrorMessage from "@/components/Error/ErrorContainer";
+import { testValidIp } from "@/Helpers/helper";
 
 const Home = () => {
   const [queryIp, setQueryIp] = useState("");
@@ -15,12 +16,11 @@ const Home = () => {
   const [startSearch, setStartSearch] = useState(false);
 
   const searchIp = (ip: string) => {
-    const ipv4Regex =
-      /^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$/;
-    const isValidIp = ipv4Regex.test(ip);
+    const isValidIp = testValidIp(ip);
     setInvalidIp(!isValidIp);
 
     if (!isValidIp) {
+      setStartSearch(false);
       return;
     }
 
@@ -28,14 +28,16 @@ const Home = () => {
     setStartSearch(true);
   };
 
-  const { data: abuseIpData, loading: abuseIpLoading, error:abuseIpError } = useGetAbuseIp(
-    queryIp,
-    startSearch
-  );
-  const { data: geoData, loading: geoLoading, error: geoError } = useGetIpGeoLocation(
-    queryIp,
-    startSearch
-  );
+  const {
+    data: abuseIpData,
+    loading: abuseIpLoading,
+    error: abuseIpError,
+  } = useGetAbuseIp(queryIp, startSearch);
+  const {
+    data: geoData,
+    loading: geoLoading,
+    error: geoError,
+  } = useGetIpGeoLocation(queryIp, startSearch);
 
   const error = abuseIpError || geoError;
 
@@ -71,15 +73,16 @@ const Home = () => {
         </div>
       </aside>
       <section className="w-full h-full bg-blue-950">
-        {error ? <ErrorMessage/> :         
-        (abuseIpLoading || geoLoading ? (
+        {error ? (
+          <ErrorMessage />
+        ) : abuseIpLoading || geoLoading ? (
           <Spinner />
         ) : (
           <ResultTable
             abuseData={abuseIpData?.data as ResultTableType}
             ipGeoData={geoData?.data as unknown as IpGeoLocationType}
           />
-        ))}
+        )}
       </section>
     </article>
   );
