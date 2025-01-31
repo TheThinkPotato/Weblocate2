@@ -6,6 +6,9 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [tailwindcss(), react()],
+  define: {
+    "process.env": {}, // Ensure no conflicts with Node.js environment variables
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

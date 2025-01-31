@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  weblocate:
+    build:
+      context: .
+      args:
+        - VITE_ABUSE_API_KEY=${VITE_ABUSE_API_KEY}
+        - VITE_IPGEOLOCATION_API_KEY=${VITE_IPGEOLOCATION_API_KEY}
+    ports:
+      - "4000:5173"
+    env_file:
+      - .env
