@@ -1,16 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+const isDev = import.meta.env.VITE_NODE_ENV === "dev";
+
 const apiCall = async (domain: string) => {
   const response = await axios.get(
-      `/api/dns.google/resolve?name=${domain}`,
-      {
-          headers: {
-              Accept: "application/json",
-          },
-          timeout: 5000, // 5 seconds timeout
-      }
-  );  
+    isDev
+      ? `/api/dns.google/resolve?name=${domain}`
+      : `https://dns.google/resolve?name=${domain}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+      timeout: 5000, // 5 seconds timeout
+    }
+  );
   return response;
 };
 

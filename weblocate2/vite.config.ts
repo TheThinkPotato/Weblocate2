@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [tailwindcss(), react()],
+  base: process.env.VITE_NODE_ENV === "dev" ?  "/" : "/Weblocate2/" ,
   define: {
     "process.env": {}, // Ensure no conflicts with Node.js environment variables
   },

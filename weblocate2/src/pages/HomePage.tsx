@@ -40,7 +40,7 @@ const Home = () => {
   };
 
   const searchDomain = (domain: string) => {
-    const isValidDomain = testValidDomain(domain);
+    const isValidDomain = domain.length === 0 ? true : testValidDomain(domain);
     setInvalidDomain(!isValidDomain);
     if (!domain) {
       setStartDomainSearch(false);
@@ -79,7 +79,7 @@ const Home = () => {
     } else {
       setQueryIp("");
       setStartSearch(false);
-      setInvalidDomain(true);
+      setInvalidDomain(false);
     }
   }, [domainIp]);
 
@@ -98,11 +98,11 @@ const Home = () => {
   };
 
   return (
-    <article className="flex w-screen h-screen bg-blue-950">
-      <aside className=" min-w-[300px] xl:w-2/8 h-full bg-[#0e67b4]">
+    <article className="flex w-full min-h-screen bg-blue-950">
+      <aside className="min-w-[300px] xl:w-2/8 bg-[#0e67b4]">
         <div className="flex flex-col">
           <div>
-            <img src="/logo.jpg" alt="Logo" className="w-fit mx-auto mt-5" />
+            <img src="logo.jpg" alt="Logo" className="w-fit mx-auto mt-5" />
             <h1 className="text-white text-5xl mx-auto text-center font-bold">
               WebLocate
             </h1>
