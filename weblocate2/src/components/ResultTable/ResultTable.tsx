@@ -44,33 +44,33 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
           )}`}
         >
           <div className="flex flex-row justify-center">
-          <img src={ipGeoData?.country_flag} className="h-6 mr-4 mt-1"/>
-          <h1 className="text-center text-2xl mb-4">
-            IP: {abuseData.ipAddress} 
-          </h1>
+            <img src={ipGeoData?.country_flag} className="h-6 mr-4 mt-1" />
+            <h1 className="text-center text-2xl mb-4">
+              IP: {abuseData.ipAddress}
+            </h1>
           </div>
           {/* Column 1 */}
           <div className="flex flex-row justify-evenly">
             <div className="flex flex-col border-0 w-1/2 pl-20">
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Domain:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Domain:</p>
                 <p>{abuseData.domain}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">ISP:</p>
+                <p className="font-medium sm:w-20 xl:w-30">ISP:</p>
                 <p>{abuseData.isp}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Usage:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Usage:</p>
                 <p>{abuseData.usageType}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">White listed:</p>
+                <p className="font-medium sm:w-20 xl:w-30">White listed:</p>
                 <p>{abuseData.isWhitelisted ? "Yes" : "No"}</p>
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
-                <p className="font-medium w-30">Abuse Score:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Abuse Score:</p>
               </div>
               <div className="flex flex-row space-x-2">
                 <BarGraph
@@ -80,52 +80,62 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
-                <p className="font-medium w-30">State:</p>
+                <p className="font-medium sm:w-20 xl:w-30">State:</p>
                 <p>{ipGeoData?.state_prov}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">District:</p>
+                <p className="font-medium sm:w-20 xl:w-30">District:</p>
                 <p>{ipGeoData?.district}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Zip Code:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Zip Code:</p>
                 <p>{ipGeoData?.zipcode}</p>
               </div>
 
-              <div className="flex flex-row space-x-2 my-4">
-                <p className="font-medium w-30">Latitude:</p>
-                <p>
-                  {ipGeoData?.latitude}{" "}
-                  {ipGeoData?.longitude &&
-                    `(${decimalToDMS(parseFloat(ipGeoData?.latitude))})`}
-                </p>
+              <div className="flex flex-row flex-wrap space-x-2 my-4">
+                <div className="pr-4">
+                  <p className="font-medium sm:w-20 xl:w-30">Latitude:</p>
+                  <p>
+                    {ipGeoData?.latitude}{" "}
+                    {ipGeoData?.longitude &&
+                      `(${decimalToDMS(parseFloat(ipGeoData?.latitude))})`}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-medium sm:w-20 xl:w-30">Longitude:</p>
+                  <p>
+                    {ipGeoData?.longitude}{" "}
+                    {ipGeoData?.longitude &&
+                      `(${decimalToDMS(parseFloat(ipGeoData?.longitude))})`}
+                  </p>
+                </div>
               </div>
             </div>
             {/* Column 2 */}
-            <div className="flex flex-col border-0 w-1/2 pl-5 xl:pl-50">
+            <div className="flex flex-col border-0 w-1/2 pl-5 2xl:pl-50">
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Host Names:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Host Names:</p>
                 <p>{abuseData.hostnames}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Country Code:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Country Code:</p>
                 <p>{abuseData.countryCode}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Public:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Public:</p>
                 <p>{abuseData.isPublic ? "Yes" : "No"}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">TOR Network:</p>
+                <p className="font-medium sm:w-20 xl:w-30">TOR:</p>
                 <p>{abuseData.isTor ? "Yes" : "No"}</p>
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
-                <p className="font-medium w-30">Distinct Users:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Distinct Users:</p>
                 <p>{abuseData.numDistinctUsers}</p>
               </div>
               <div className="flex flex-row space-x-2">
-                <p className="font-medium w-30">Last Reported:</p>
+                <p className="font-medium sm:w-20 xl:w-30">Last Reported:</p>
                 <p>
                   {new Date(abuseData.lastReportedAt).toLocaleString("en-GB", {
                     timeZone: "Australia/Sydney",
@@ -149,14 +159,7 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               </div>
               <div className="flex flex-row space-x-2 h-5"></div>
 
-              <div className="flex flex-row space-x-2 my-4">
-                <p className="font-medium w-30">Longitude:</p>
-                <p>
-                  {ipGeoData?.longitude}{" "}
-                  {ipGeoData?.longitude &&
-                    `(${decimalToDMS(parseFloat(ipGeoData?.longitude))})`}
-                </p>
-              </div>
+              <div className="flex flex-row space-x-2 my-4"></div>
             </div>
           </div>
 
