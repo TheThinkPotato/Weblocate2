@@ -6,6 +6,7 @@ services:
       args:
         - VITE_ABUSE_API_KEY=${VITE_ABUSE_API_KEY}
         - VITE_IPGEOLOCATION_API_KEY=${VITE_IPGEOLOCATION_API_KEY}
+        - VITE_NODE_ENV=${VITE_NODE_ENV}
     ports:
       - "4000:5173"
     env_file:

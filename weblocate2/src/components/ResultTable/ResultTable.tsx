@@ -36,7 +36,7 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
   };
 
   return (
-    <div className="m-16">
+    <div className="flex flex-col min-h-screen justify-center lg:mx-16 sm:mx-2 md:mx-4">
       {abuseData && (
         <section
           className={`bg-white flex-col pt-2 pb-4 border-8 ${alertBorderColor(
@@ -163,131 +163,6 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
             </div>
           </div>
 
-          {/* <div className="sm:px-4 lg:px-30 xl:px-60"> */}
-
-          {/* <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">Domain:</p>
-                <p>{abuseData.domain}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">Host Names:</p>
-                <p>{abuseData.hostnames}</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">ISP:</p>
-                <p>{abuseData.isp}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">Country Code:</p>
-                <p>{abuseData.countryCode}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">Usage:</p>
-                <p>{abuseData.usageType}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">Public:</p>
-                <p>{abuseData.isPublic ? "Yes" : "No"}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">White listed:</p>
-                <p>{abuseData.isWhitelisted ? "Yes" : "No"}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">TOR Network:</p>
-                <p>{abuseData.isTor ? "Yes" : "No"}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-evenly mt-4">
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">Abuse Score:</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">Distinct Users:</p>
-                <p>{abuseData.numDistinctUsers}</p>
-              </div>
-            </div>
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <BarGraph
-                  value={abuseData.abuseConfidenceScore}
-                  colour={barGraphColor(abuseData.abuseConfidenceScore)}
-                />
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2 pr-5">
-                <p className="font-medium">Last Reported:</p>
-                <p>
-                  {new Date(abuseData.lastReportedAt).toLocaleString("en-GB", {
-                    timeZone: "Australia/Sydney",
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-evenly mt-4">
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">State:</p>
-                <p>{ipGeoData?.state_prov}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">State Code:</p>
-                <p>{ipGeoData?.state_code}</p>
-              </div>
-            </div>
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">District:</p>
-                <p>{ipGeoData?.district}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">City:</p>
-                <p>{ipGeoData?.city}</p>
-              </div>
-            </div>
-            <div className="flex flex-row justify-evenly">
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">Zip Code:</p>
-                <p>{ipGeoData?.zipcode}</p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2"></div>
-            </div>
-
-            <div className="flex flex-row justify-evenly mb-2">
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">Latitude:</p>
-                <p>{ipGeoData?.latitude}{" "}
-                {ipGeoData?.longitude &&
-                    `(${decimalToDMS(parseFloat(ipGeoData?.latitude))})`}
-
-                </p>
-              </div>
-              <div className="flex flex-row space-x-2 w-1/2">
-                <p className="font-medium">Longitude:</p>
-                <p>
-                  {ipGeoData?.longitude}{" "}
-                  {ipGeoData?.longitude &&
-                    `(${decimalToDMS(parseFloat(ipGeoData?.longitude))})`}
-                </p>
-              </div>
-            </div> */}
-          {/* </div> */}
           <div className="px-4">
             {ipGeoData?.latitude && ipGeoData?.longitude && (
               <Map

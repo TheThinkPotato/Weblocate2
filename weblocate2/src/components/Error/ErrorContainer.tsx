@@ -4,7 +4,7 @@ interface ErrorMessageProps {
 
 const ErrorMessage = ({ message }: ErrorMessageProps) => {
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="flex justify-center items-center h-screen">
       <div className="bg-white border-4 border-red-700 text-red-900 text-center rounded-lg shadow-lg p-6">
         <h1 className="text-3xl font-bold mb-4 text-red-700">Error</h1>
         {message ? (
