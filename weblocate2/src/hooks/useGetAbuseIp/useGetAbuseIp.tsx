@@ -1,22 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-
-const isDev = import.meta.env.VITE_NODE_ENV === "dev";
+const baseApiUrl = import.meta.env.VITE_BASE_API_URL ?? "";
 
 const apiCall = async (ip: string) => {
-  const response = await axios.get(
-    isDev
-      ? `http://127.0.0.1:5000/api/abuse?ip=${ip}`
-      : `/api/abuse?ip=${ip}`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*", // Allow requests from any domain
-      },
-      timeout: 5000, // 5 seconds timeout
-    }
-  );
+  const response = await axios.get(`${baseApiUrl}/api/abuse?ip=${ip}`, {
+    headers: {
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": "*", // Allow requests from any domain
+    },
+    timeout: 5000, // 5 seconds timeout
+  });
   return response.data;
 };
 

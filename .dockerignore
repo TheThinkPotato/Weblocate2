@@ -1,7 +1,11 @@
-node_modules
-dist
-.vite
+weblocate2/node_modules
+api/node_modules
+weblocate2/dist
+weblocate2/.vite
 .env
+*.env
+api/.env
+weblocate2/.env
 .DS_Store
 .git
 .gitignore
