@@ -168,6 +168,8 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               <Map
                 longitude={parseFloat(ipGeoData?.longitude)}
                 latitude={parseFloat(ipGeoData?.latitude)}
+                domain={abuseData.domain}
+                city={ipGeoData.city}
               />
             )}
           </div>

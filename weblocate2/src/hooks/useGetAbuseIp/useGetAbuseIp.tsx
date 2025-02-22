@@ -1,21 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const apiKey = import.meta.env.VITE_ABUSE_API_KEY;
-const isDev = import.meta.env.VITE_NODE_ENV === "dev";
 
-if (!apiKey) {
-  throw new Error("API key is not defined");
-}
+const isDev = import.meta.env.VITE_NODE_ENV === "dev";
 
 const apiCall = async (ip: string) => {
   const response = await axios.get(
     isDev
-      ? `/api/abuseipdb/api/v2/check?ipAddress=${ip}`
-      : `https://api.abuseipdb.com/api/v2/check?ipAddress=${ip}&Key=${apiKey}`,
+      ? `http://127.0.0.1:5000/api/abuse?ip=${ip}`
+      : `/api/abuse?ip=${ip}`,
     {
       headers: {
-        Key: apiKey,
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*", // Allow requests from any domain
       },

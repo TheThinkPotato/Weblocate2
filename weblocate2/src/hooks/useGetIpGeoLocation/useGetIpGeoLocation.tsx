@@ -1,18 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const apiKey = import.meta.env.VITE_IPGEOLOCATION_API_KEY;
 const isDev = import.meta.env.VITE_NODE_ENV === "dev";
-
-if (!apiKey) {
-  throw new Error("API key is not defined");
-}
 
 const apiCall = async (ip: string) => {
   const response = await axios.get(
     isDev
-      ? `/api/geoip/ipgeo?apiKey=${apiKey}&ip=${ip}`
-      : `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}`,
+      ? `http://127.0.0.1:5000/api/geo?ip=${ip}`
+      : `/api/geo?ip=${ip}`,
     {
       headers: {
         Accept: "application/json",

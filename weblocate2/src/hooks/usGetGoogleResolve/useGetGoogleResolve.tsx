@@ -6,8 +6,8 @@ const isDev = import.meta.env.VITE_NODE_ENV === "dev";
 const apiCall = async (domain: string) => {
   const response = await axios.get(
     isDev
-      ? `/api/dns.google/resolve?name=${domain}`
-      : `https://dns.google/resolve?name=${domain}`,
+      ? `http://127.0.0.1:5000/api/googleResolve?name=${domain}`
+      : `/api/googleResolve?name=${domain}`,
     {
       headers: {
         Accept: "application/json",
