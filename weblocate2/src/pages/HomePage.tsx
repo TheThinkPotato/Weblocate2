@@ -100,7 +100,7 @@ const Home = () => {
   return (
     <article className="flex w-full min-h-screen bg-blue-950">
       <aside className="min-w-[300px] xl:w-2/8 bg-[#0e67b4]">
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full">
           <div>
             <img src="logo.jpg" alt="Logo" className="w-fit mx-auto mt-5" />
             <h1 className="text-white text-5xl mx-auto text-center font-bold">
@@ -128,6 +128,11 @@ const Home = () => {
             />
           </div>
         </div>
+        <div className="relative flex flex-row justify-center">
+            <p className="absolute bottom-0 p-2 text-white text-center text-sm">
+              Map location is approximate and may not be accurate.
+            </p>
+          </div>
       </aside>
       <section className="w-full h-full bg-blue-950">
         {error ? (

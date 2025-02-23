@@ -35,6 +35,16 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
     }
   };
 
+  const textScore = (score: number) => {
+    if (score < alertLevel.LOW) {
+      return  <span className="text-green-600 ml-4">Good</span>;
+    } else if (score < alertLevel.MEDIUM) {
+      return  <span className="text-orange-500 ml-4">Warning</span>;
+    } else {
+      return  <span className="text-red-700 ml-4">DANGER BAD</span>;
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen justify-center lg:mx-16 sm:mx-2 md:mx-4">
       {abuseData && (
@@ -70,7 +80,7 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
-                <p className="font-medium sm:w-20 xl:w-30">Abuse Score:</p>
+                <p className="font-medium w-full">Abuse Score: {textScore(abuseData.abuseConfidenceScore)}</p>
               </div>
               <div className="flex flex-row space-x-2">
                 <BarGraph
