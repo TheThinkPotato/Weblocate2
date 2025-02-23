@@ -37,11 +37,11 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
 
   const textScore = (score: number) => {
     if (score < alertLevel.LOW) {
-      return  <span className="text-green-600 ml-4">Good</span>;
+      return <span className="text-green-600 ml-4">Good</span>;
     } else if (score < alertLevel.MEDIUM) {
-      return  <span className="text-orange-500 ml-4">Warning</span>;
+      return <span className="text-orange-500 ml-4">Warning</span>;
     } else {
-      return  <span className="text-red-700 ml-4">DANGER BAD</span>;
+      return <span className="text-red-700 ml-4">BAD</span>;
     }
   };
 
@@ -53,10 +53,13 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
             abuseData.abuseConfidenceScore
           )}`}
         >
-          <div className="flex flex-row justify-center">
-            <img src={ipGeoData?.country_flag} className="h-6 mr-4 mt-1" />
-            <h1 className="text-center text-2xl mb-4">
+          <div className="flex flex-row justify-center flex-wrap">
+            <h1 className="text-center text-2xl mb-4 mr-4">
               IP: {abuseData.ipAddress}
+            </h1>
+            <img src={ipGeoData?.country_flag} className="h-6 mr-4 mt-1  shadow" />
+            <h1 className="text-center text-2xl mb-4">
+              {ipGeoData?.country_name_official}
             </h1>
           </div>
           {/* Column 1 */}
@@ -80,7 +83,9 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
-                <p className="font-medium w-full">Abuse Score: {textScore(abuseData.abuseConfidenceScore)}</p>
+                <p className="font-medium w-full">
+                  Abuse Score: {textScore(abuseData.abuseConfidenceScore)}
+                </p>
               </div>
               <div className="flex flex-row space-x-2">
                 <BarGraph
@@ -90,8 +95,8 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
-                <p className="font-medium sm:w-20 xl:w-30">State:</p>
-                <p>{ipGeoData?.state_prov}</p>
+                <p className="font-medium sm:w-20 xl:w-30">Country:</p>
+                <p>{ipGeoData?.country_name_official}</p>
               </div>
               <div className="flex flex-row space-x-2">
                 <p className="font-medium sm:w-20 xl:w-30">District:</p>
@@ -160,14 +165,17 @@ const ResultTable = ({ abuseData, ipGeoData }: ResultTableProps) => {
               </div>
 
               <div className="flex flex-row space-x-2 mt-4">
+                <p className="font-medium w-30">State:</p>
+                <p>{ipGeoData?.state_prov}</p>
+              </div>
+              <div className="flex flex-row space-x-2">
                 <p className="font-medium w-30">State Code:</p>
                 <p>{ipGeoData?.state_code}</p>
               </div>
-              <div className="flex flex-row space-x-2">
+              <div className="flex flex-row space-x-2 h-5">
                 <p className="font-medium w-30">City:</p>
                 <p>{ipGeoData?.city}</p>
               </div>
-              <div className="flex flex-row space-x-2 h-5"></div>
 
               <div className="flex flex-row space-x-2 my-4"></div>
             </div>

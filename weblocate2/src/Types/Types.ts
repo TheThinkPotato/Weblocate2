@@ -24,6 +24,7 @@ export type IpGeoLocationType = {
   latitude: string;
   longitude: string;
   country_flag?: string;
+  country_name_official: string;
 };
 
 export type GoogleResolveAnswerType = {
