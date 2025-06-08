@@ -129,10 +129,13 @@ const Home = () => {
           </div>
         </div>
         <div className="relative flex flex-row justify-center">
-            <p className="absolute bottom-0 p-2 text-white text-center text-sm">
-              Map location is approximate and may not be accurate.
+          <div className="absolute bottom-0 p-2">
+            <p className=" text-white text-center text-sm">
+              Map location is approximate and may not be accurate.<span className="pr-1"/> Web site
+              by Daniel Lopez.
             </p>
           </div>
+        </div>
       </aside>
       <section className="w-full h-full bg-blue-950">
         {error ? (
